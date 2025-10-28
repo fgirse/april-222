@@ -4,9 +4,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node -r ./sharp-init.js ./node_modules/.bin/next dev",
+    "dev": "node -r ./sharp-override.js -r ./sharp-init.js ./node_modules/.bin/next dev",
+    "dev:safe": "SHARP_IGNORE_GLOBAL_LIBVIPS=1 SHARP_FORCE_GLOBAL_LIBVIPS=0 next dev",
     "dev:original": "next dev",
-    "build": "node -r ./sharp-init.js ./node_modules/.bin/next build",
+    "build": "node -r ./sharp-override.js -r ./sharp-init.js ./node_modules/.bin/next build",
+    "build:safe": "SHARP_IGNORE_GLOBAL_LIBVIPS=1 SHARP_FORCE_GLOBAL_LIBVIPS=0 next build",
     "build:original": "next build",
     "start": "next start",
     "lint": "next lint",
