@@ -9,6 +9,13 @@ const nextConfig = {
     },
   },
   serverExternalPackages: ['@prisma/studio-core'],
+  // Fix workspace root warning
+  outputFileTracingRoot: __dirname,
+  // Ensure Sharp is properly handled
+  images: {
+    loader: 'default',
+    formats: ['image/webp', 'image/avif'],
+  },
 };
 
 export default nextConfig;
