@@ -11,10 +11,14 @@ const nextConfig = {
   serverExternalPackages: ['@prisma/studio-core'],
   // Fix workspace root warning
   outputFileTracingRoot: __dirname,
-  // Ensure Sharp is properly handled
+  // Ensure Sharp is properly handled and disable fallback
   images: {
     loader: 'default',
     formats: ['image/webp', 'image/avif'],
+    unoptimized: false,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 };
 
