@@ -2,6 +2,9 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: "Carlo2024",
     NEXT_PUBLIC_CLOUDINARY_PRESET_NAME: "school",
+    // Ensure Sharp environment variables are available
+    SHARP_IGNORE_GLOBAL_LIBVIPS: "1",
+    SHARP_FORCE_GLOBAL_LIBVIPS: "0",
   },
   experimental: {
     serverActions: {
@@ -19,6 +22,16 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  // Force Sharp usage and prevent fallback
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push({
+        sharp: 'commonjs sharp'
+      });
+    }
+    return config;
   },
 };
 
